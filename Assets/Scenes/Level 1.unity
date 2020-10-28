@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 1886779561}
   m_Layer: 0
   m_Name: Platform (1)
-  m_TagString: Untagged
+  m_TagString: Fuel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,12 +235,12 @@ PrefabInstance:
     - target: {fileID: 1567492002958526818, guid: c7e15bf4cbcd3e24493db6a7464df3a4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1567492002958526818, guid: c7e15bf4cbcd3e24493db6a7464df3a4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22
+      value: -39.03
       objectReference: {fileID: 0}
     - target: {fileID: 1567492002958526818, guid: c7e15bf4cbcd3e24493db6a7464df3a4,
         type: 3}
@@ -300,6 +300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LunchPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166635155186812154, guid: 6f7036a204f9136479ba3d8941a2f481,
+        type: 3}
+      propertyPath: m_TagString
+      value: Friendly
       objectReference: {fileID: 0}
     - target: {fileID: 2166635155186812158, guid: 6f7036a204f9136479ba3d8941a2f481,
         type: 3}
@@ -515,7 +520,7 @@ GameObject:
   - component: {fileID: 2976083019220673193}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Fuel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -537,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 829527258, guid: b51e540db9ce9fb4eab15ced7ad45861, type: 3}
       propertyPath: m_Constraints
-      value: 0
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 829527260, guid: b51e540db9ce9fb4eab15ced7ad45861, type: 3}
       propertyPath: rcsThrust
