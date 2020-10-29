@@ -20,6 +20,7 @@ public class Oscillator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(period==0)return;
         float cycle = Time.time / period;
         const float tau = Mathf.PI * 2;
         float rawSinWave = Mathf.Sin(cycle * tau);
@@ -27,5 +28,6 @@ public class Oscillator : MonoBehaviour
         movementFactor = (rawSinWave / 2f) + .5f;
         Vector3 offset = movementFactor * MovementVector;
         transform.position = startingPos + offset;
+
     }
 }
