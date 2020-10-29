@@ -8,10 +8,10 @@ public class Rocket : MonoBehaviour
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float levelLoadDelay = 1.5f;
-    
+
 
     [SerializeField] AudioClip mainEngine, deathEngine, winLevel;
-    [SerializeField] ParticleSystem mainEngineParticle,deathEngineParticle,winLevelParticle;
+    [SerializeField] ParticleSystem mainEngineParticle, deathEngineParticle, winLevelParticle;
 
     Rigidbody rigiBody;
     AudioSource audioSource;
@@ -30,6 +30,12 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//重新加載當前場景 buildIndex可替換成 name 效果並無差別 加載字串和數值都差別而已
+        }
+#endif
         if (state == State.Alive)
         {
             Thrust();
@@ -70,6 +76,7 @@ public class Rocket : MonoBehaviour
     private void LoadFirstLevel()
     {
         SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//重新加載當前場景 buildIndex可替換成 name 效果並無差別 加載字串和數值都差別而已
         state = State.Alive;
     }
 
@@ -94,7 +101,7 @@ public class Rocket : MonoBehaviour
         float upThis = mainThrust * Time.deltaTime;
         if (Input.GetKey(KeyCode.Space))
         {
-            rigiBody.AddRelativeForce(Vector3.up * upThis);
+            rigiBody.AddRelativeForce(Vector3.up * upThis );
             if (audioSource.isPlaying == false)
             {
                 audioSource.PlayOneShot(mainEngine);
