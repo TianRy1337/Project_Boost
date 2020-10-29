@@ -7,11 +7,13 @@ public class Rocket : MonoBehaviour
 {
     [SerializeField] float rcsThrust = 100f;
     [SerializeField] float mainThrust = 1000f;
+    [SerializeField] AudioClip mainEngine, deathEngine, winLevel;
+    [SerializeField] ParticleSystem mainEngineParticle,deathEngineParticle,winLevelParticle;
 
     Rigidbody rigiBody;
     AudioSource audioSource;
 
-    enum State{Alive,Dying,Transcending}
+    enum State { Alive, Dying, Transcending }
     State state = State.Alive;
 
     // Start is called before the first frame update
@@ -25,32 +27,38 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(state==State.Alive)
+        if (state == State.Alive)
         {
             Thrust();
             Rotate();
         }
-        
+
     }
     private void OnCollisionEnter(Collision other)
     {
-       if(state !=State.Alive)return; //不會觸發其他碰撞效果
+        if (state != State.Alive) return; //不會觸發其他碰撞效果
         switch (other.gameObject.tag)
         {
             case "Friendly":
                 break;
             case "Finish":
                 state = State.Transcending;
+                audioSource.Stop();
                 Debug.Log("Hit Finish");
-                Invoke("LoadNextLevel",1.5f); 
+                audioSource.PlayOneShot(winLevel);
+                winLevelParticle.Play();
+                Invoke("LoadNextLevel", 1.5f);
                 break;
             default:
                 state = State.Dying;
-                Debug.Log("Dead");
-                Invoke("LoadFirstLevel",1.5f); 
+                audioSource.Stop();
+                audioSource.PlayOneShot(deathEngine);
+                deathEngineParticle.Play();
+                Invoke("LoadFirstLevel", 1.5f);
                 break;
         }
     }
+
     private void LoadNextLevel()
     {
         SceneManager.LoadScene(1);
@@ -86,12 +94,14 @@ public class Rocket : MonoBehaviour
             rigiBody.AddRelativeForce(Vector3.up * upThis);
             if (audioSource.isPlaying == false)
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
+            mainEngineParticle.Play();//只會出現沒按的時候
         }
         else
         {
             audioSource.Stop();
+            //mainEngineParticle.Stop();
         }
     }
 }
